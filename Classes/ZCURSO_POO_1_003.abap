@@ -1,8 +1,80 @@
 REPORT ZCURSO_POO_1_003.
 
-INCLUDE: zcurso_poo_1_heranca,
-         zcurso_poo_1_polimorfismo,
-         zcurso_poo_1_abstrata.
+*&----------------------------------------------------------------
+*& Classe com herança
+*&----------------------------------------------------------------
+
+CLASS pai DEFINITION.
+  PUBLIC SECTION.
+    METHODS: metodo_pai.
+ENDCLASS.
+
+CLASS filho DEFINITION INHERITING FROM pai.
+ENDCLASS.
+
+CLASS pai IMPLEMENTATION.
+  METHOD metodo_pai.
+    WRITE: /'Esse é um metodo do pai!'.
+  ENDMETHOD.
+ENDCLASS.
+
+*&----------------------------------------------------------------
+*& Polimorfismo
+*&----------------------------------------------------------------
+
+CLASS mae DEFINITION.
+  PUBLIC SECTION.
+    METHODS: comprimento.
+ENDCLASS.
+CLASS filha DEFINITION INHERITING FROM mae.
+  PUBLIC SECTION.
+    METHODS: comprimento REDEFINITION.
+ENDCLASS.
+
+CLASS mae IMPLEMENTATION.
+  METHOD: comprimento.
+    WRITE: /'Olá pessoal'.
+  ENDMETHOD.
+ENDCLASS.
+CLASS filha IMPLEMENTATION.
+  METHOD: comprimento.
+    WRITE: /'Iae pessoal.'.
+  ENDMETHOD.
+ENDCLASS.
+
+*&----------------------------------------------------------------
+*& Classe abstrata
+*&----------------------------------------------------------------
+
+CLASS trabalhar DEFINITION ABSTRACT.
+  PUBLIC SECTION.
+    METHODS: trabalhar ABSTRACT.
+ENDCLASS.
+
+*&----------------------------------------------------------------
+*& Classes usando o methoods da classe abstrata
+*&----------------------------------------------------------------
+
+CLASS engenheiro DEFINITION INHERITING FROM trabalhar.
+  PUBLIC SECTION.
+    METHODS: trabalhar REDEFINITION.
+ENDCLASS.
+CLASS medico DEFINITION INHERITING FROM trabalhar.
+  PUBLIC SECTION.
+    METHODS: trabalhar REDEFINITION.
+ENDCLASS.
+
+CLASS engenheiro IMPLEMENTATION.
+  METHOD: trabalhar.
+    WRITE: /'Engenheiro: Planejar a construção da casa.'.
+  ENDMETHOD.
+ENDCLASS.
+
+CLASS medico IMPLEMENTATION.
+  METHOD: trabalhar.
+    WRITE: /'Medico: Atende pascente no escritorio'.
+  ENDMETHOD.
+ENDCLASS.
 
 START-OF-SELECTION.
 
